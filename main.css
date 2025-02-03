@@ -1,0 +1,155 @@
+body {
+  font-family: "Space Grotesk", serif;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+[data-testid="colorBox"] {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s;
+}
+
+.options-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+[data-testid="colorOption"] {
+  height: 100px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+[data-testid="colorOption"]:hover {
+  transform: scale(1.05);
+}
+
+[data-testid="newGameButton"] {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+[data-testid="newGameButton"]:hover {
+  background-color: #45a049;
+}
+
+[data-testid="gameStatus"] {
+  font-size: 18px;
+  margin: 10px 0;
+  min-height: 24px;
+}
+
+[data-testid="score"] {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+@keyframes celebrate {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeColors {
+  0% {
+    color: #28a745;
+  }
+  50% {
+    color: #ffcc00;
+  }
+  100% {
+    color: #ff4500;
+  }
+}
+
+.correct {
+  animation: celebrate 0.6s ease-in-out,
+    fadeColors 1.2s ease-in-out infinite alternate;
+  font-weight: bold;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes flashRed {
+  0% {
+    color: #ff0000;
+  }
+  50% {
+    color: #cc0000;
+  }
+  100% {
+    color: #ff0000;
+  }
+}
+
+.wrong {
+  animation: shake 0.4s ease-in-out, flashRed 1s ease-in-out infinite alternate;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .options-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  [data-testid="colorBox"] {
+    width: 150px;
+    height: 150px;
+  }
+}
