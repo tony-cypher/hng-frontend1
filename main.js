@@ -12,43 +12,40 @@ const colors = [
   "#808000",
   "#008080",
 ];
+
 let score = 0;
-let currentColor;
+let currentColor = "";
 
-const colorBox = document.querySelector('[data-testid="colorBox"]');
-const optionsContainer = document.querySelector(".options-container");
-const scoreDisplay = document.querySelector('[data-testid="score"]');
-const gameStatus = document.querySelector('[data-testid="gameStatus"]');
-const newGameButton = document.querySelector('[data-testid="newGameButton"]');
+const colorBox = document.querySelector(".colorBox");
+const optionsBox = document.querySelector(".options-box");
+const showScore = document.querySelector(".score");
+const gameStatus = document.querySelector(".gameStatus");
+const newGameButton = document.querySelector(".newGameButton");
 
-function initializeGame() {
-  // Select random target color
+function startGame() {
   currentColor = colors[Math.floor(Math.random() * colors.length)];
   colorBox.style.backgroundColor = currentColor;
 
-  // Generate color options
-  const colorOptions = getRandomColors(5).concat(currentColor);
-  colorOptions.sort(() => Math.random() - 0.5);
+  const randomColors = generateRandomColors(5).concat(currentColor);
+  randomColors.sort(() => Math.random() - 0.5);
 
-  // Create option buttons
-  optionsContainer.innerHTML = "";
-  colorOptions.forEach((color) => {
+  optionsBox.innerHTML = "";
+  randomColors.forEach((color) => {
     const button = document.createElement("button");
-    button.dataset.testid = "colorOption";
+    button.className = "colorOption";
     button.style.backgroundColor = color;
-    button.addEventListener("click", () => handleGuess(color));
-    optionsContainer.appendChild(button);
+    button.addEventListener("click", () => handleChoice(color));
+    optionsBox.appendChild(button);
   });
 }
 
-function getRandomColors(num) {
+function generateRandomColors(num) {
   const availableColors = colors.filter((c) => c !== currentColor);
   const selected = [];
   while (selected.length < num) {
     const color =
       availableColors[Math.floor(Math.random() * availableColors.length)];
 
-    // selects the color if it does not exist.
     if (!selected.includes(color)) {
       selected.push(color);
     }
@@ -56,13 +53,13 @@ function getRandomColors(num) {
   return selected;
 }
 
-function handleGuess(selectedColor) {
+function handleChoice(selectedColor) {
   if (selectedColor === currentColor) {
     score++;
-    scoreDisplay.textContent = `Score: ${score}`;
+    showScore.textContent = `Score: ${score}`;
     gameStatus.textContent = "Correct! Well done! 🎉";
     gameStatus.classList.add("correct");
-    setTimeout(initializeGame, 1000);
+    setTimeout(startGame, 1000);
   } else {
     gameStatus.textContent = "Wrong! Try again! ❌";
     gameStatus.classList.add("wrong");
@@ -76,10 +73,9 @@ function handleGuess(selectedColor) {
 
 newGameButton.addEventListener("click", () => {
   score = 0;
-  scoreDisplay.textContent = "Score: 0";
+  showScore.textContent = "Score: 0";
   gameStatus.textContent = "";
-  initializeGame();
+  startGame();
 });
 
-// Start initial game
-initializeGame();
+startGame();

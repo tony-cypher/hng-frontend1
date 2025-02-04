@@ -14,14 +14,17 @@
   </head>
   <body>
     <div class="container">
-      <div data-testid="colorBox"></div>
-      <p data-testid="gameInstructions">Guess the correct color!</p>
-      <div data-testid="score">Score: 0</div>
-      <div data-testid="gameStatus"></div>
-      <div class="options-container"></div>
-      <button data-testid="newGameButton">New Game</button>
+      <div class="colorBox" data-testid="colorBox"></div>
+      <p class="gameInstructions" data-testid="gameInstructions">
+        Guess the correct color!
+      </p>
+      <div class="score" data-testid="score">Score: 0</div>
+      <div class="gameStatus" data-testid="gameStatus">correct</div>
+      <div class="options-box" data-testid="colorOption"></div>
+      <button class="newGameButton" data-testid="newGameButton">
+        New Game
+      </button>
     </div>
-
     <script src="main.js"></script>
   </body>
 </html>
